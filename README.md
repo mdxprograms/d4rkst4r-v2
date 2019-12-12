@@ -1,3 +1,10 @@
+# d4rkst4r
+
+Netlify url: https://d4rkst4r-v2.netlify.com/
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ae7ec0e0-cb7c-411a-baa8-fa531d8710d6/deploy-status)](https://app.netlify.com/sites/d4rkst4r-v2/deploys)
+
+
 This project was bootstrapped with [Create CLJS App](https://github.com/filipesilva/create-cljs-app).
 
 ## Available Scripts
