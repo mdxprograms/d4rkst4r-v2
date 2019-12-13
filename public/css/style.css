@@ -2,8 +2,48 @@ body {
   font-family: 'Roboto Mono', monospace;
 }
 
+#search-filter-wrapper {
+  background: #333;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  margin: 0 auto;
+  padding: 10px;
+  position: fixed;
+  right: 0;
+  width: 400px;
+  z-index: 2;
+}
+
+#search-filter {
+  border: 2px solid #333;
+  border-right: none;
+  display: block;
+  outline: 0;
+  padding: 10px;
+  width: 300px;
+}
+
+#reset-search {
+  border: 2px solid #333;
+  background: tomato;
+  display: block;
+  outline: 0;
+  padding: 10px;
+}
+
+#no-results {
+  background: #fcfcfc;
+  color: tomato;
+  margin: 40px auto 0;
+  padding: 20px;
+  text-align: center;
+  width: 400px;
+}
+
 #overlay {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
   bottom: 0;
   cursor: pointer;
   height: 100%;
@@ -17,17 +57,24 @@ body {
 
 #overlay #text {
   color: white;
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.5;
   margin: 0 auto;
-  padding: 20% 0 0;
+  padding: 5% 0 0;
+  transition: all 200ms ease-in;
   width: 85%;
+}
+
+@media (min-width: 768px) {
+  #overlay #text {
+    font-size: 18px;
+  }
 }
 
 .card {
   cursor: pointer;
   opacity: 0.7;
-  transition: opacity 300ms ease-in;
+  transition: opacity 200ms ease-in;
 }
 
 .card:hover {
