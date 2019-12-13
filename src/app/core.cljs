@@ -4,18 +4,21 @@
             [app.info-card :refer [info-card]])
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
-(def explanation (r/atom nil))
-(def show-explanation (r/atom false))
 (defonce results (r/atom nil))
+(def explanation (r/atom nil))
+(def hdurl (r/atom ""))
+(def show-explanation (r/atom false))
 (def filtered-results (r/atom nil))
 
-(defn handle-item-click [text]
+(defn handle-item-click [item]
   (reset! show-explanation true)
-  (reset! explanation text))
+  (reset! explanation (get-in item ["explanation"]))
+  (reset! hdurl (get-in item ["hdurl"])))
 
 (defn handle-overlay-click []
   (reset! show-explanation false)
-  (reset! explanation ""))
+  (reset! explanation "")
+  (reset! hdurl ""))
 
 (defn handle-reset-results []
   (reset! filtered-results @results))
@@ -31,8 +34,9 @@
 
 (defn overlay []
   [:div#overlay
-   {:on-click (fn [e] (.preventDefault e) (handle-overlay-click))}
-   [:div#text @explanation]])
+   {:on-click (fn [e] (handle-overlay-click))}
+   [:div#text @explanation]
+   [:a.hd-link.f6.link.dim.ph3.pv2.mb2.dib.black.bg-light-green {:href @hdurl :target "_blank"} "View in HD"]])
 
 (defn search-filter []
   [:div#search-filter-wrapper

@@ -65,6 +65,13 @@ body {
   width: 85%;
 }
 
+#overlay .hd-link {
+  display: block;
+  margin: 40px auto 0;
+  text-align: center;
+  width: 150px;
+}
+
 @media (min-width: 768px) {
   #overlay #text {
     font-size: 18px;
