@@ -20,6 +20,7 @@
   "dependencies": {
     "@testing-library/dom": "^6.10.1",
     "@testing-library/react": "^9.3.2",
+    "axios": "^0.19.0",
     "clj-kondo": "2019.11.23",
     "create-react-class": "~15.6.3",
     "highlight.js": "9.16.2",

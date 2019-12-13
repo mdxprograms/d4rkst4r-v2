@@ -1,0 +1,24 @@
+name: Rebuild APOD data
+on:
+  schedule:
+    # Run at 0300 EST daily
+    - cron: '00 7 * * *'
+jobs:
+  build:
+    name: Request Netlify Webhook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.12'
+      - run: npm install
+      - run: npm run fetch-apod
+      - name: Commit APOD data
+        run: |
+          git config --global user.name 'Josh Waller'
+          git config --global user.email 'mdx.programs@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout "${GITHUB_REF:11}"
+          git commit -am "Automated rebuild"
+          git push
