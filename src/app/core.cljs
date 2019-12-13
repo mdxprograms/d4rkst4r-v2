@@ -50,7 +50,7 @@
   [:div.article
    [search-filter]
    (if (= (count @filtered-results) 0) [no-results])
-   [:div.cf.pa2.flex.flex-wrap
+   [:div.cf.flex.flex-wrap.justify-center
     (for [item @filtered-results]
       ^{:key (get-in item ["title"])}
       [info-card item handle-item-click])]])
