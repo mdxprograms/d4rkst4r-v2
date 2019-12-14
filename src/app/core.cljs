@@ -1,8 +1,7 @@
 (ns app.core
   (:require [reagent.core :as r]
             [ajax.core :refer [GET]]
-            [app.info-card :refer [info-card]])
-  (:require-macros [cljs.core.async.macros :refer [go]]))
+            [app.info-card :refer [info-card]]))
 
 (defonce results (r/atom nil))
 (def explanation (r/atom nil))
