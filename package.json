@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "fetch-apod": "node fetchapod.js",
     "sc": "shadow-cljs",
     "server": "shadow-cljs stop && shadow-cljs start",
     "start": "shadow-cljs watch app",
