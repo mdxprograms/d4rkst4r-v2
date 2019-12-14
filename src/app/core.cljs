@@ -7,17 +7,20 @@
 (defonce results (r/atom nil))
 (def explanation (r/atom nil))
 (def hdurl (r/atom ""))
+(def title (r/atom ""))
 (def show-explanation (r/atom false))
 (def filtered-results (r/atom nil))
 
 (defn handle-item-click [item]
   (reset! show-explanation true)
   (reset! explanation (get-in item ["explanation"]))
+  (reset! title (get-in item ["title"]))
   (reset! hdurl (get-in item ["hdurl"])))
 
 (defn handle-overlay-click []
   (reset! show-explanation false)
   (reset! explanation "")
+  (reset! title "")
   (reset! hdurl ""))
 
 (defn handle-reset-results []
@@ -35,6 +38,7 @@
 (defn overlay []
   [:div#overlay
    {:on-click (fn [e] (handle-overlay-click))}
+   [:h4.f4.white @title]
    [:div#text @explanation]
    [:a.hd-link.f6.link.dim.ph3.pv2.mb2.dib.black.bg-light-green {:href @hdurl :target "_blank"} "View in HD"]])
 
@@ -47,10 +51,10 @@
   [:h3#no-results.f3 "No results :("])
 
 (defn cards []
-  [:div.article
+  [:div.article.bg-black
    [search-filter]
    (if (= (count @filtered-results) 0) [no-results])
-   [:div.cf.flex.flex-wrap.justify-center
+   [:div.cf.flex.flex-wrap
     (for [item @filtered-results]
       ^{:key (get-in item ["title"])}
       [info-card item handle-item-click])]])

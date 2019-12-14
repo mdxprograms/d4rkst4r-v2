@@ -55,6 +55,13 @@ body {
   z-index: 2;
 }
 
+#overlay h4 {
+  display: block;
+  margin: 30px auto 0;
+  padding: 0 20px;
+  text-align: center;
+}
+
 #overlay #text {
   color: white;
   font-size: 14px;
