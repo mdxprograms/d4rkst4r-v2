@@ -36,10 +36,10 @@
 
 (defn overlay []
   [:div#overlay
-   {:on-click (fn [e] (handle-overlay-click))}
+   {:on-click (fn [e] (handle-overlay-click))
+    :style {:background-image (str "url(" @hdurl ")")}}
    [:h4.f4.white @title]
-   [:div#text @explanation]
-   [:a.hd-link.f6.link.dim.ph3.pv2.mb2.dib.black.bg-light-green {:href @hdurl :target "_blank"} "View in HD"]])
+   [:div#text @explanation]])
 
 (defn search-filter []
   [:div#search-filter-wrapper

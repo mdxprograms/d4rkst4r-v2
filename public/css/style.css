@@ -43,11 +43,14 @@ body {
 }
 
 #overlay {
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.6);
+  background-position: center;
+  background-size: cover;
   bottom: 0;
   cursor: pointer;
   height: 100%;
   left: 0;
+  opacity: 0.8;
   position: fixed;
   right: 0;
   top: 0;
@@ -56,18 +59,22 @@ body {
 }
 
 #overlay h4 {
+  background-color: #000;
+  color: #fff;
   display: block;
   margin: 30px auto 0;
-  padding: 0 20px;
+  padding: 20px 0;
   text-align: center;
+  width: 85%;
 }
 
 #overlay #text {
-  color: white;
+  background: #000;
+  color: #fff;
   font-size: 14px;
   line-height: 1.5;
   margin: 0 auto;
-  padding: 5% 0 0;
+  padding: 0 20px 20px;
   transition: all 200ms ease-in;
   width: 85%;
 }
@@ -87,7 +94,10 @@ body {
 
 .card {
   cursor: pointer;
+  height: 25vh;
   opacity: 0.7;
+  background-position: center;
+  background-size: cover;
   transition: opacity 200ms ease-in;
 }
 
