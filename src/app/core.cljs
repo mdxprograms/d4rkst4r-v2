@@ -4,47 +4,41 @@
             [app.info-card :refer [info-card]]
             [app.helpers :as helpers]))
 
-(defonce results (r/atom nil))
-(def explanation (r/atom nil))
-(def hdurl (r/atom ""))
-(def title (r/atom ""))
-(def show-explanation (r/atom false))
+(def state (r/atom {:results []
+                    :item []
+                    :show-explanation false}))
 
 (defn handle-item-click [item]
-  (reset! show-explanation true)
-  (reset! explanation (get-in item ["explanation"]))
-  (reset! title (get-in item ["title"]))
-  (reset! hdurl (get-in item ["hdurl"])))
+  (swap! state assoc :show-explanation true)
+  (swap! state assoc :item item))
 
 (defn handle-overlay-click []
-  (reset! show-explanation false)
-  (reset! explanation "")
-  (reset! title "")
-  (reset! hdurl ""))
+  (swap! state assoc :show-explanation false)
+  (swap! state assoc :item []))
 
 (defn results-with-image [item]
   (helpers/is-image (get-in item ["url"])))
 
 (defn get-results []
-  (GET "apods.json" :handler (fn [data] (reset! results (filter results-with-image data)))))
+  (GET "apods.json" :handler (fn [data] (swap! state update-in [:results] #(filter results-with-image data)))))
 
 (defn overlay []
   [:div#overlay
    {:on-click (fn [e] (handle-overlay-click))
-    :style {:background-image (str "url(" @hdurl ")")}}
-   [:h4.f4.white @title]
-   [:div#text @explanation]])
+    :style {:background-image (str "url(" (get-in (:item @state) ["hdurl"]) ")")}}
+   [:h4.f4.white (get-in (:item @state) ["title"])]
+   [:div#text (get-in (:item @state) ["explanation"])]])
 
 (defn cards []
   [:div.article.bg-black
    [:div.cf.flex.flex-wrap
-    (for [item @results]
+    (for [item (:results @state)]
       ^{:key (get-in item ["title"])}
       [info-card item handle-item-click])]])
 
 (defn app []
   [:div.app
-   (when @show-explanation [overlay])
+   (when (:show-explanation @state) [overlay])
    [cards]])
 
 (defn ^:dev/after-load start []
