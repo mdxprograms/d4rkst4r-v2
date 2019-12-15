@@ -1,7 +1,8 @@
 (ns app.core
   (:require [reagent.core :as r]
             [ajax.core :refer [GET]]
-            [app.info-card :refer [info-card]]))
+            [app.info-card :refer [info-card]]
+            [app.helpers :as helpers]))
 
 (defonce results (r/atom nil))
 (def explanation (r/atom nil))
@@ -21,8 +22,11 @@
   (reset! title "")
   (reset! hdurl ""))
 
+(defn results-with-image [item]
+  (helpers/is-image (get-in item ["url"])))
+
 (defn get-results []
-  (GET "apods.json" :handler (fn [r] (reset! results r))))
+  (GET "apods.json" :handler (fn [data] (reset! results (filter results-with-image data)))))
 
 (defn overlay []
   [:div#overlay
@@ -38,11 +42,10 @@
       ^{:key (get-in item ["title"])}
       [info-card item handle-item-click])]])
 
-  (defn app []
-    [:div.app
-     (when @show-explanation [overlay])
-     [cards]])
-
+(defn app []
+  [:div.app
+   (when @show-explanation [overlay])
+   [cards]])
 
 (defn ^:dev/after-load start []
   (get-results)
