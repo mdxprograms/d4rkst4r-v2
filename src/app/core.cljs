@@ -33,8 +33,8 @@
   [:div.article.bg-black
    [:div.cf.flex.flex-wrap
     (for [item (:results @state)]
-      ^{:key (get-in item ["title"])}
-      [info-card item handle-item-click])]])
+         ^{:key (get-in item ["title"])}
+         [info-card item handle-item-click])]])
 
 (defn app []
   [:div.app
