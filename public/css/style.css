@@ -43,14 +43,12 @@ body {
 }
 
 #overlay {
-  background-color: rgba(0,0,0,0.6);
   background-position: center;
   background-size: cover;
   bottom: 0;
   cursor: pointer;
   height: 100%;
   left: 0;
-  opacity: 0.8;
   overflow-y: scroll;
   position: fixed;
   right: 0;
@@ -64,7 +62,7 @@ body {
   color: #fff;
   display: block;
   margin: 30px auto 0;
-  padding: 20px 0;
+  padding: 20px 5px;
   text-align: center;
   width: 85%;
 }
@@ -95,16 +93,8 @@ body {
   opacity: 1;
 }
 
-.card:hover {
-  opacity: 1;
-}
-
 @media (min-width: 768px) {
   #overlay #text {
     font-size: 18px;
-  }
-
-  .card {
-    opacity: 0.5;
   }
 }
